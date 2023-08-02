@@ -64,8 +64,8 @@ modifyArray([1, "two", 3, "four", 5]); // Виведе 1,two,,four,5
 
 // Завдання 5: Дано масив рядків. За допомогою циклу for переберіть масив, виведіть кожен елемент на консоль у верхньому регістрі.
 function printUppercase(array) {
-  for (let value of array) {
-    console.log([value].toUpperCase(array));
+  for (let index of array) {
+    console.log(index.toUpperCase());
   }
   // Проходимося по всіх елементах масиву
   // Перетворюємо кожен елемент в верхній регістр та виводимо на консоль
@@ -77,6 +77,18 @@ printUppercase(["one", "two", "three"]); // Виведе ONE TWO THREE
 // Завдання 6: Функція приймає деструктуризований масив чисел де буду перший елемент та масив всіх інших.
 // За допомогою циклу for переберіть масив, знайдіть мінімальне та максимальне значення. Результат виведіть на консоль.
 function findMinMax([firstElement, ...restElements]) {
+  let min = firstElement;
+  let max = firstElement;
+  for (let i = 0; i < restElements.length; i++) {
+    if (restElements[i] < min) {
+      min = restElements[i];
+    }
+    if (restElements[i] > max) {
+      max = restElements[i];
+    }
+  }
+  console.log("Min:", min, "Max:", max);
+
   // Ініціалізуємо змінні для мінімального та максимального значень, задаємо їм перше значення масиву
   // Перебираємо масив починаючи з другого елементу
   // Перевіряємо, чи поточний елемент менший за мінімальне значення
@@ -92,6 +104,7 @@ findMinMax([5, 2, 8, 1, 9, 3]); // Виведе Min: 1 Max: 9
 // Завдання 7: Функція приймає масив рядків.
 // Перетворіть масив в рядок за допомогою методу toString() та повторіть його 2 рази. Результат виведіть на консоль.
 function printStrings(array) {
+  console.log(array.toString().repeat(2));
   // Перетворюємо масив в рядок і видаляемо пробіли та виводимо його на консоль
 }
 
@@ -102,6 +115,10 @@ printStrings([1, "two", 3, "four", 5]); // 1,two,3,four,51,two,3,four,5
 // За допомогою методу toString() перетворіть масив в рядок, та виясніть чи є в цьому рядку підрядок subString .
 
 function concatenateStrings(array, subString) {
+  let str = array.toString();
+  let result = str.includes(subString);
+  console.log(result);
+
   // Використовуємо метод toString() для перетворення масиву в рядок
   //Перевіряємо чи містить рядок підрядок
   // Виводимо результат
@@ -114,6 +131,11 @@ concatenateStrings([1, "two", 3, "four", 5], "two"); // Виведе true
 // За допомогою циклу for-in переберіть масив, додайте до кожного елемента 10.
 // Зберігайте результат в новому масиві. Результат виведіть на консоль.
 function addTenToEach(array) {
+  let result = Array(array.length);
+  for (let index in array) {
+    result[index] = array[index] + 10;
+  }
+  console.log(result);
   // Ініціалізуємо масив через конструктор з такою же кількістю елементів як в вхідному масиві для зберігання результату
   // Перебираємо масив за допомогою циклу for-in
   // Додаємо до поточного елемента 10 та додаємо результат в новий масив
@@ -125,6 +147,22 @@ addTenToEach([5, 10, 15, 20]); // Виведе [15, 20, 25, 30]
 
 // Завдання 10: Створити функцію, яка приймає масив чисел як аргумент.
 function swapMinMax(array) {
+  let max = array[0],
+    min = array[0];
+  let maxIndex = 0,
+    minIndex = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > max) {
+      max = array[i];
+      maxIndex = i;
+    } else if (array[i] < min) {
+      min = array[i];
+      minIndex = i;
+    }
+  }
+  [array[minIndex], array[maxIndex]] = [array[maxIndex], array[minIndex]];
+  return array;
+
   // Ініціалізуємо дві змінні (max і min) з першим елементом масиву. Ці змінні будуть використовуватися для зберігання максимального та мінімального значень в масиві.
   // Ініціалізуємо дві змінні (maxIndex і minIndex) з нульового значення. Ці змінні будуть використовуватися для зберігання індексів максимального та мінімального значень в масиві.
   // Використовуємо цикл for для ітерації по масиву. Починаємо з першого елемента (i = 0) і продовжуємо до останнього елемента масиву (i < array.length).
